@@ -7,13 +7,11 @@ public class Catapult : MonoBehaviour
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private Spade _spade;
 
-    private void Start()
+    private void OnEnable()
     {
         _playerInput.ReloadKeyPressed += OnReload;
         _playerInput.ShootKeyPressed += OnShoot;
         _spade.ReadyShoot += OnReadyShoot;
-
-        Instantiate(_projectilePrefab, _projectileSpawnPoint.position, Quaternion.identity);
     }
 
     private void OnDisable()

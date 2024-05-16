@@ -8,23 +8,24 @@ public class Spade : MonoBehaviour
     [SerializeField] private float _returnSpeed;
     [SerializeField] private SpringJoint _springJoint;
 
-    public event Action ReadyShoot;
-
     private Quaternion _startRotation;
-    private Rigidbody _rigidBody;
+    private Rigidbody _rigidbody;
     private float _minSpring = 0;
     private float _maxSpring = 50;
+
+    public event Action ReadyShoot;
 
     private void Start()
     {
         _startRotation = transform.rotation;
         _springJoint.spring = _minSpring;
-        _rigidBody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
+        ReadyShoot?.Invoke();
     }
 
     public void Rotate()
     {
-        _rigidBody.WakeUp();
+        _rigidbody.WakeUp();
         _springJoint.spring = _maxSpring;
     }
 
